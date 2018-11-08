@@ -58,7 +58,8 @@ public class WordSearch{
      */
     public boolean addWordHorizontal(String word,int row, int col){
       try{
-        if (col + word.length() - 1 < data[row].length){ //testing overlap
+        if (col + word.length() - 1 < data[row].length){
+          //checking overlap
           int letter = 0;
           for (int i = col; i < data[row].length && letter < word.length(); i++){
             if (data[row][i] == word.charAt(letter) || data[row][i] == ('_')){
@@ -99,7 +100,18 @@ public class WordSearch{
     public boolean addWordVertical(String word,int row, int col){
       try{
         if (row + word.length() - 1 < data.length){
+          //checking overlap
           int letter = 0;
+          for (int i = row; i < data.length && letter < word.length(); i++){
+            if (data[i][col] == word.charAt(letter) || data[i][col] == '_'){
+            letter++;
+            }
+            else{
+              return false;
+            }
+          }
+
+          letter = 0;
           for (int i = row; i < data.length && letter < word.length(); i++){
             data[i][col] = word.charAt(letter);
             letter++;
