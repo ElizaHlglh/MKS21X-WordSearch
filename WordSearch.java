@@ -7,17 +7,22 @@ public class WordSearch{
      *@param col is the starting width of the WordSearch
      */
     public WordSearch(int rows,int cols){
-      date = new char[rows][cols];
-      for (int i = o; i < rows; i++){
-        for (int x = 0; x < cols; x++){
-          data[i][x] = '_';
+      try{
+        data = new char[rows][cols];
+        for (int i = 0; i < rows; i++){
+          for (int x = 0; x < cols; x++){
+            data[i][x] = '_';
+          }
         }
+      }
+      catch(NegativeArraySizeException e){
+        System.out.println("Invalid input");
       }
     }
 
     /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
-      for (int i = o; i < data.length; i++){
+      for (int i = 0; i < data.length; i++){
         for (int x = 0; x < data[i].length; x++){
           data[i][x] = '_';
         }
@@ -30,11 +35,11 @@ public class WordSearch{
      */
     public String toString(){
       String puzzle = "";
-      for (int i = o; i < data.length; i++){
+      for (int i = 0; i < data.length; i++){
         for (int x = 0; x < data[i].length; x++){
           puzzle += data[i][x] + "  ";
         }
-        puzzle += "/n";
+        puzzle += "\n";
       }
       return puzzle;
     }
@@ -53,8 +58,18 @@ public class WordSearch{
      */
     public boolean addWordHorizontal(String word,int row, int col){
       try{
-        if (col + word.length() - 1 < data[row].length){
+        if (col + word.length() - 1 < data[row].length){ //testing overlap
           int letter = 0;
+          for (int i = col; i < data[row].length && letter < word.length(); i++){
+            if (data[row][i] == word.charAt(letter) || data[row][i] == ('_')){
+              letter++;
+            }
+            else{
+              return false;
+            }
+          }
+
+          letter = 0;
           for (int i = col; i < data[row].length && letter < word.length(); i++){
             data[row][i] = word.charAt(letter);
             letter++;
