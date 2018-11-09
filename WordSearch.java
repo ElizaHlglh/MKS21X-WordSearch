@@ -126,4 +126,48 @@ public class WordSearch{
         return false;
       }
     }
+
+   /**Attempts to add a given word to the specified position of the WordGrid.
+     *The word is added from top left to bottom right, must fit on the WordGrid,
+     *and must have a corresponding letter to match any letters that it overlaps.
+     *
+     *@param word is any text to be added to the word grid.
+     *@param row is the vertical locaiton of where you want the word to start.
+     *@param col is the horizontal location of where you want the word to start.
+     *@return true when the word is added successfully. When the word doesn't fit,
+     *or there are overlapping letters that do not match, then false is returned.
+     */
+    public boolean addWordDiagonal(String word,int row, int col){
+      try{
+        if (row + word.length() - 1 < data.length && col + word.length() - 1 < data[row].length){
+          //checking overlap
+          int letter = 0;
+          int x = col;
+          for (int y = row; y < data.length && letter < word.length() && x < data[y].length; y++){
+            if (data[y][x] == word.charAt(letter) || data[y][x] == '_'){
+            letter++;
+            x++;
+            }
+            else{
+              return false;
+            }
+          }
+
+          x = col;
+          letter = 0;
+          for (int y = row; y < data.length && letter < word.length() && x < data[y].length; y++){
+            data[y][x] = word.charAt(letter);
+            letter++;
+            x++;
+          }
+          return true;
+        }
+        else{
+          return false;
+        } //in case row is > than the data's length
+      }
+      catch(IndexOutOfBoundsException e){
+        return false;
+      }
+ }
 }
