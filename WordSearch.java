@@ -23,7 +23,8 @@ public class WordSearch{
         while(in.hasNext()){
           wordsToAdd.add(in.next());
         }
-        
+
+        addWord(String word, row, col, int rowIncrement, int colIncrement);
       }
       catch(FileNotFoundException e){
         System.out.println("File not found: " + fileName);
@@ -31,6 +32,31 @@ public class WordSearch{
         System.exit(1);
       }
 
+    }
+
+    public WordSearch( int rows, int cols, String fileName, int randSeed){
+
+    }
+
+    public String toString(){
+      String puzzle = "";
+      for (int i = 0; i < data.length; i++){
+        puzzle += "| "
+        for (int x = 0; x < data[i].length; x++){
+          puzzle += data[i][x] + "  ";
+        }
+        puzzle += "| \n";
+      }
+      puzzle += "Words: ";
+      for (int i = 0; i < wordsAdded.length; i++){
+        if (i == wordsAdded.length-1){
+          puzzle += wordsAdded[i] + "(seed: " + seed + ")";
+        }
+        else{
+          puzzle += wordsAdded[i] + ", ";
+        }
+      }
+      return puzzle;
     }
 
 }
