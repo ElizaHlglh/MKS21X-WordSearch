@@ -135,5 +135,23 @@ public class WordSearch{
     *[ 0,-1] would add towards the left because (col - 1), with no row change
     */
 
+    private void addAllWords(){
+      for (int z = 0; z < 100 || wordsToAdd.size() == 0; z++){
+        //1. random word + increments
+        randgen = new Random();
+        seed = Math.abs(randgen.nextInt() % wordsToAdd.size());
+        String Randword = wordsToAdd.get(seed);
+        int  rowIncrement = Math.abs(randgen.nextInt() % 3) -1;
+        int  colIncrement = Math.abs(randgen.nextInt() % 3) -1;
 
+        //2. try adding the word at random loc
+        for (int i = 0; i < 10; i++){
+          int row = Math.abs(randgen.nextInt() % data.length);
+          int col = Math.abs(randgen.nextInt() % data[row].length);
+          if (addWord(Randword, row, col, rowIncrement, colIncrement)){
+            i = 10;
+          }
+        }
+      }
+    }
 }
