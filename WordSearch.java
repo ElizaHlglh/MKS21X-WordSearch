@@ -1,6 +1,12 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
-// GOAL FOR THURS : 1. FINISH THE RUNNING CODE (except fillIN) BY THEN
+/* GOAL FOR THURS : 1. FINISH THE RUNNING CODE (except fillIN) BY THEN
+                    2. INSTALL key
+                    3. UNIFY TO ONE CONSTRUCTOR (5 arguments)
+            FRI : 1. fillIn the empty
+                  2. TESTING EVERYTHING
+                  3. BEAUTIFY ?
+*/
 public class WordSearch{
     private char[][]data;
 
@@ -19,6 +25,7 @@ public class WordSearch{
     public static void main(String[]args){
       if (args.length == 0 || args.length == 1 || args.length == 2 || args.length > 4){
         System.out.println("Wrong arguments! Please put in at least three arguments for row, col, and fileName for the puzzle or no more than four!!!");
+        System.exit(1); //terminate program when there is no input
       }
       try{
         if (Integer.parseInt(args[0]) == 0 || Integer.parseInt(args[1]) == 0){// if the row/col size are zero
