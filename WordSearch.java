@@ -49,6 +49,8 @@ public class WordSearch{
       try{
         File f = new File(fileName);
         Scanner in = new Scanner(f);
+        wordsToAdd = new ArrayList<String>();
+        wordsAdded = new ArrayList<String>();
         while(in.hasNext()){
           wordsToAdd.add(in.next());
         }
@@ -61,6 +63,7 @@ public class WordSearch{
         randgen = new Random();
         seed = randgen.nextInt();
         randgen = new Random(seed);
+        addAllWords();
       }
       catch(FileNotFoundException e){
         System.out.println("File not found: " + fileName);
@@ -73,6 +76,8 @@ public class WordSearch{
       try{
         File f = new File(fileName);
         Scanner in = new Scanner(f);
+        wordsToAdd = new ArrayList<String>();
+        wordsAdded = new ArrayList<String>();
         while(in.hasNext()){
           wordsToAdd.add(in.next());
         }
@@ -84,6 +89,7 @@ public class WordSearch{
         }
         randgen = new Random(randSeed);
         seed = randSeed;
+        addAllWords();
       }
       catch(FileNotFoundException e){
         System.out.println("File not found: " + fileName);
@@ -113,19 +119,6 @@ public class WordSearch{
       return puzzle;
     }
 
-    /**Attempts to add a given word to the specified position of the WordGrid.
-    *The word is added in the direction rowIncrement,colIncrement
-    *Words must have a corresponding letter to match any letters that it overlaps.
-    *
-    *@param word is any text to be added to the word grid.
-    *@param row is the vertical locaiton of where you want the word to start.
-    *@param col is the horizontal location of where you want the word to start.
-    *@param rowIncrement is -1,0, or 1 and represents the displacement of each letter in the row direction
-    *@param colIncrement is -1,0, or 1 and represents the displacement of each letter in the col direction
-    *@return true when: the word is added successfully.
-    *        false when: the word doesn't fit, OR  rowchange and colchange are both 0,
-    *        OR there are overlapping letters that do not match
-    */
    private boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
      try{
        if (rowIncrement == 0 && colIncrement == 0){
@@ -159,18 +152,12 @@ public class WordSearch{
       }
    }
 
-   /*[rowIncrement,colIncrement] examples:
-    *[-1,1] would add up and the right because (row -1 each time, col + 1 each time)
-    *[ 1,0] would add downwards because (row+1), with no col change
-    *[ 0,-1] would add towards the left because (col - 1), with no row change
-    */
-
     private void addAllWords(){
       for (int z = 0; z < 100 || wordsToAdd.size() == 0; z++){
         //1. random word + increments
-        randgen = new Random();
-        seed = Math.abs(randgen.nextInt() % wordsToAdd.size());
-        String Randword = wordsToAdd.get(seed);
+        //randgen = new Random();
+        int x = Math.abs(randgen.nextInt() % wordsToAdd.size());
+        String Randword = wordsToAdd.get(x);
         int  rowIncrement = Math.abs(randgen.nextInt() % 3) -1;
         int  colIncrement = Math.abs(randgen.nextInt() % 3) -1;
 
