@@ -23,8 +23,8 @@ public class WordSearch{
     private ArrayList<String>wordsAdded;
 
     public static void main(String[]args){
-      if (args.length == 0 || args.length == 1 || args.length == 2 || args.length > 4){
-        System.out.println("Wrong arguments! Please put in at least three arguments for row, col, and fileName for the puzzle or no more than four!!!");
+      if (args.length == 0 || args.length == 1 || args.length == 2 || args.length > 5){
+        System.out.println("Wrong arguments! Please put in at least three arguments for row, col, and fileName for the puzzle or no more than five arguments!!!");
         System.exit(1); //terminate program when there is no input
       }
       try{
