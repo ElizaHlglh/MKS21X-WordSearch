@@ -15,6 +15,18 @@ public class WordSearch{
     //all words that were successfully added get moved into wordsAdded.
     private ArrayList<String>wordsAdded;
 
+    public static void main(String[]args){
+      if (args.length == 0 || args.length == 1 || args.length == 2 || ){
+        System.out.println("Not enough information! Please put in at least three arguments for row, col, and fileName for the puzzle!!!");
+      }
+      if (args.length == 3){
+        WordSearch w = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+      }
+      if (args.length == 4){
+        WordSearch w = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+      }
+    }
+
     //Choose a randSeed using the clock random
     public WordSearch( int rows, int cols, String fileName){
       try{
@@ -31,6 +43,7 @@ public class WordSearch{
         }
         randgen = new Random();
         seed = randgen.nextInt();
+        randgen = new Random(seed);
       }
       catch(FileNotFoundException e){
         System.out.println("File not found: " + fileName);
