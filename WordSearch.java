@@ -1,11 +1,8 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
-/* GOAL FOR THURS : 1. FINISH THE RUNNING CODE (except fillIN) BY THEN
-                    2. INSTALL key
-                    3. UNIFY TO ONE CONSTRUCTOR (5 arguments)
-            FRI : 1. fillIn the empty
-                  2. TESTING EVERYTHING
-                  3. BEAUTIFY ?
+/* Questions :  1. how to handle when file not found (the error message)
+                2. row/col negative/zero error message
+                3. seed range (what if u put 100000000? will toString print this (seed:100000000)?)
 */
 public class WordSearch{
     private char[][]data;
@@ -24,12 +21,12 @@ public class WordSearch{
 
     public static void main(String[]args){
       if (args.length == 0 || args.length == 1 || args.length == 2 || args.length > 5){
-        System.out.println("Wrong arguments! Please put in at least three arguments for row, col, and fileName for the puzzle or no more than five arguments!!!");
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         System.exit(1); //terminate program when there is no input
       }
       try{
-        if (Integer.parseInt(args[0]) == 0 || Integer.parseInt(args[1]) == 0){// if the row/col size are zero
-          System.out.println("row and/or column size can't be zero!!!");
+        if (Integer.parseInt(args[0]) <= 0 || Integer.parseInt(args[1]) <= 0){// if the row/col size are zero
+          System.out.println("row and/or column size can't be zero or less!!!");
         }
         else{//when the row/col aren't zero
           if (args.length == 3){
@@ -47,7 +44,7 @@ public class WordSearch{
           }
         }
       catch(NumberFormatException e){
-        System.out.println("Error!!! Argument(s) isn't the right type!!! Check if they are int, int, String, int, String - *all int in String form");
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
       }
 
     }
@@ -119,14 +116,14 @@ public class WordSearch{
       for (int i = 0; i < data.length; i++){
         puzzle += "| ";
         for (int x = 0; x < data[i].length; x++){
-          puzzle += data[i][x] + "  ";
+          puzzle += data[i][x] + " ";
         }
         puzzle += "| \n";
       }
       puzzle += "Words: ";
       for (int i = 0; i < wordsAdded.size(); i++){
         if (i == wordsAdded.size()-1){
-          puzzle += wordsAdded.get(i) + "(seed: " + seed + ")";
+          puzzle += wordsAdded.get(i) + " (seed: " + seed + ")";
         }
         else{
           puzzle += wordsAdded.get(i) + ", ";
@@ -171,7 +168,6 @@ public class WordSearch{
     private void addAllWords(){
       for (int z = 0; z < 100 && wordsToAdd.size() != 0; z++){
         //1. random word + increments
-        //randgen = new Random();
         int x = Math.abs(randgen.nextInt() % wordsToAdd.size());
         String Randword = wordsToAdd.get(x);
         int  rowIncrement = Math.abs(randgen.nextInt() % 3) -1;
