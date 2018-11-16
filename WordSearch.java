@@ -1,8 +1,6 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
-/* Questions :  1. how to handle when file not found (the error message)
-                2. row/col negative/zero error message
-                3. seed range (what if u put 100000000? will toString print this (seed:100000000)?)
+/* Questions : 
 */
 public class WordSearch{
     private char[][]data;
@@ -26,7 +24,7 @@ public class WordSearch{
       }
       try{
         if (Integer.parseInt(args[0]) <= 0 || Integer.parseInt(args[1]) <= 0){// if the row/col size are zero
-          System.out.println("row and/or column size can't be zero or less!!!");
+          System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         }
         else{//when the row/col aren't zero
           if (args.length == 3){
@@ -34,15 +32,25 @@ public class WordSearch{
             System.out.println(w);
           }
           else if (args.length == 4){
-            WordSearch w = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), "No");
-            System.out.println(w);
+            if (Integer.parseInt(args[3]) > 10000 || Integer.parseInt(args[3]) < 0){
+              System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
+            }
+            else{
+              WordSearch w = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), "No");
+              System.out.println(w);
+            }
           }
           else{//when there are five arguments
+            if (Integer.parseInt(args[3]) > 10000 || Integer.parseInt(args[3]) < 0){
+              System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
+            }
+            else{
               WordSearch w = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), args[4]);
               System.out.println(w);
             }
           }
         }
+      }
       catch(NumberFormatException e){
         System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
       }
@@ -72,7 +80,7 @@ public class WordSearch{
         fillIn();
       }
       catch(FileNotFoundException e){
-        System.out.println("File not found: " + fileName);
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         //e.printStackTrace();
         System.exit(1);
       }
@@ -105,7 +113,7 @@ public class WordSearch{
 
       }
       catch(FileNotFoundException e){
-        System.out.println("File not found: " + fileName);
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         //e.printStackTrace();
         System.exit(1);
       }
