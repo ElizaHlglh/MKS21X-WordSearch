@@ -1,7 +1,6 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
-/* Questions : 
-*/
+
 public class WordSearch{
     private char[][]data;
 
@@ -74,7 +73,7 @@ public class WordSearch{
           }
         }
         randgen = new Random();
-        seed = randgen.nextInt()%10000;
+        seed = Math.abs(randgen.nextInt()%10000);
         randgen = new Random(seed);
         addAllWords();
         fillIn();

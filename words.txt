@@ -1,6 +1,4 @@
-ham
 beef
-sushi
-turkey
-venison
-meatloaf
+buff
+baff
+biff
