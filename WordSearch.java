@@ -177,8 +177,8 @@ public class WordSearch{
         //1. random word + increments
         int x = Math.abs(randgen.nextInt() % wordsToAdd.size());
         String Randword = wordsToAdd.get(x);
-        int  rowIncrement = Math.abs(randgen.nextInt() % 3) -1;
-        int  colIncrement = Math.abs(randgen.nextInt() % 3) -1;
+        int  rowIncrement = randgen.nextInt() % 2;
+        int  colIncrement = randgen.nextInt() % 2;
 
         //2. try adding the word at random loc
         for (int i = 0; i < 10; i++){
