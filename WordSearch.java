@@ -186,6 +186,7 @@ public class WordSearch{
           int col = Math.abs(randgen.nextInt() % data[row].length);
           if (addWord(Randword, row, col, rowIncrement, colIncrement)){
             i = 10;
+            z = 0;
           }
         }
       }
